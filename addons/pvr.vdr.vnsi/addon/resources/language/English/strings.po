@@ -228,5 +228,9 @@ msgid "Timeshift Mode"
 msgstr ""
 
 msgctxt "#30105"
-msgid "Timeshift Buffer x100 MB"
+msgid "Timeshift Buffer (RAM) x100 MB"
+msgstr ""
+
+msgctxt "#30106"
+msgid "Timeshift Buffer (File) x1 GB"
 msgstr ""
