@@ -234,3 +234,7 @@ msgstr ""
 msgctxt "#30106"
 msgid "Timeshift Buffer (File) x1 GB"
 msgstr ""
+
+msgctxt "#30107"
+msgid "VDR Admin"
+msgstr ""
