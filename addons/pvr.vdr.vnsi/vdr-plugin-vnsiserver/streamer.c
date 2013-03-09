@@ -194,11 +194,12 @@ void cLiveStreamer::Action(void)
     else if (ret == -2)
     {
       if (!Open(m_Demuxer.GetSerial()))
+      {
+        m_Socket->Shutdown();
         break;
+      }
     }
   }
-  Close();
-  m_Socket->Shutdown();
   INFOLOG("exit streamer thread");
 }
 
@@ -211,7 +212,7 @@ bool cLiveStreamer::StreamChannel(const cChannel *channel, int priority, cxSocke
   }
 
   m_Channel   = channel;
-  m_Priority  = 0; //priority;
+  m_Priority  = priority;
   m_Socket    = Socket;
 
   if (!Open())
