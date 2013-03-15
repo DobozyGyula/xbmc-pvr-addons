@@ -138,7 +138,20 @@ if test "$use_external_ffmpeg" = "yes"; then
 fi
 AC_SUBST(FFMPEG_INCLUDES)
 
-### End external Libraries 
+AC_CHECK_LIB([GL],[main],have_gl=yes, have_gl=no)  
+if test "$have_gl" = "yes"; then
+  AC_DEFINE([HAVE_GL],[1],["Define to 1 if we have gl"])
+fi
+echo "GL: $have_gl"
+
+AC_CHECK_LIB([GLESv2],[main],have_gles2=yes, have_gles2=no)
+if test "$have_gles2" = "yes"; then
+  AC_DEFINE([HAVE_GLES2],[1],["Define to 1 if we have gles2"])
+  AM_CONDITIONAL(HAVE_GLES2, true)
+else
+  AM_CONDITIONAL(HAVE_GLES2, false)
+fi
+echo "GLES2: $have_gles2"
 
 ### Build addons with dependencies
 if test "$build_addons_with_dependencies" = "yes"; then
