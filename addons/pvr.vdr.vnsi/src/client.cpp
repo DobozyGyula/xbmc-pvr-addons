@@ -353,6 +353,8 @@ ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
 
 void ADDON_Stop()
 {
+  if(VNSIData)
+    VNSIData->Close();
 }
 
 void ADDON_FreeSettings()
