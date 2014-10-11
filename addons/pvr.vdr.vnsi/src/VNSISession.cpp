@@ -56,6 +56,11 @@ cVNSISession::~cVNSISession()
   Close();
 }
 
+void cVNSISession::Shutdown()
+{
+  if (m_socket)
+    m_socket->Shutdown();
+}
 void cVNSISession::Close()
 {
   if(IsOpen())

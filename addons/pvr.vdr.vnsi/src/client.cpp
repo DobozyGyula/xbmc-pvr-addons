@@ -354,7 +354,12 @@ ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
 void ADDON_Stop()
 {
   if(VNSIData)
+  {
+    XBMC->Log(LOG_DEBUG, "Shutdown of VDR VNSI PVR-Client");
+    VNSIData->Shutdown();
+    XBMC->Log(LOG_DEBUG, "Closing down VDR VNSI PVR-Client");
     VNSIData->Close();
+   }
 }
 
 void ADDON_FreeSettings()
