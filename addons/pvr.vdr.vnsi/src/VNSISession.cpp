@@ -48,6 +48,7 @@ cVNSISession::cVNSISession()
   : m_protocol(0)
   , m_socket(NULL)
   , m_connectionLost(false)
+  ,m_shutdown(false)
 {
 }
 
@@ -60,7 +61,9 @@ void cVNSISession::Shutdown()
 {
   if (m_socket)
     m_socket->Shutdown();
+  m_shutdown = true;
 }
+
 void cVNSISession::Close()
 {
   if(IsOpen())
@@ -82,7 +85,7 @@ bool cVNSISession::Open(const std::string& hostname, int port, const char *name)
   uint64_t iTarget = iNow + g_iConnectTimeout * 1000;
   if (!m_socket)
     m_socket = new CTcpConnection(hostname.c_str(), port);
-  while (!m_socket->IsOpen() && iNow < iTarget)
+  while (!m_socket->IsOpen() && !m_shutdown && iNow < iTarget)
   {
     if (!m_socket->Open(iTarget - iNow))
       CEvent::Sleep(100);
